@@ -10,7 +10,7 @@ user_interupt() {
     echo "User has cancelled the process..."
     echo "Archiving and saving your current progress"
 
-    tar -czvf "${WORKSPACE}.tar.gz" "./"
+    tar -czvf "${WORKSPACE}.tar.gz" "./$WORKSPACE"
 
     echo "Archive created successfully"
 
@@ -19,6 +19,8 @@ user_interupt() {
     echo "Removed the incomplete workspace"
     echo ""
     echo "Byiiii"
+    
+    exit 0
 }
 
 
@@ -59,11 +61,11 @@ start_system() {
     mv "$RESOURCES_PATH/attendance_checker.py" "$WORKSPACE"
     mv "$RESOURCES_PATH/assets.csv" "$WORKSPACE/Helpers"
     mv "$RESOURCES_PATH/config.json" "$WORKSPACE/Helpers"
-    mv "$RESOURCES_PATH/reports.log" "$WORKSPACE/reports"
-
+    touch "$WORKSPACE/reports/reports.log"
+    
     echo "Files added in the WORKSPACE directory..."
     echo ""
-    rmdir "$RESOURCES_PATH"
+    rm -rf "$RESOURCES_PATH"
     echo "Environment cleanup successful..."
 
     marks_configuration
